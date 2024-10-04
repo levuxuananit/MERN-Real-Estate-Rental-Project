@@ -6,6 +6,8 @@ const cors = require('cors');
 const morgan = require('morgan');
 const app = express();
 const PORT = process.env.PORT || 3000;
+const userRoutes = require('./routes/userRoutes');
+
 dotenv.config();
 // Kết nối tới MongoDB
 const connectionStringCluster = 'mongodb+srv://hidengu:meo3102003@cluster0.pmuki99.mongodb.net/BookingTicketApp'
@@ -18,6 +20,8 @@ app.use(cors());
 app.use(morgan("common"));
 app.use(express.json())
 
+
+app.use('/api/v1/users', userRoutes);
 
   // ...
 // Sử dụng body-parser middleware
