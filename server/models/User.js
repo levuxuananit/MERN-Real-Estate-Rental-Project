@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
         type: String,
     },
     avatar: {
-        type: Buffer, // BLOB tương đương với Buffer trong MongoDB
+        type: String, // BLOB tương đương với Buffer trong MongoDB
     },
 }, {
     timestamps: true // tự động thêm createdAt và updatedAt
