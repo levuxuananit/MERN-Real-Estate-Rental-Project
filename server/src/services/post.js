@@ -3,7 +3,7 @@ import Image from "../models/image.js";
 import Attribute from "../models/attribute.js";
 import User from "../models/user.js";
 import dotenv from "dotenv";
-
+import { v4 } from 'uuid';
 dotenv.config();
 
 // GET ALL POSTS
@@ -82,11 +82,14 @@ export const getNewPostService = () =>
       const response = await Post.find({})
         .sort({ createdAt: -1 })
         .limit(+process.env.LIMIT)
-        .populate({ path: "images", select: "image" })
+        // .populate({ path: "images", select: "image" })
         .populate({
-          path: "attributes",
-          select: "price acreage published hashtag",
+          path: "attributesId",
+          foreignField: "id", //tìm theo id
+          select: "id price acreage published hashtag", // Select the relevant fields
+          strictPopulate: false, // Allow population with UUID (string) references
         })
+
         .select("id title star createdAt")
         .lean();
 
@@ -103,10 +106,18 @@ export const findPostByIdService = (postId) =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await Post.findById(postId)
-        .populate({ path: "images", select: "image" })
+        // .populate({ path: "images", select: "image" })
         .populate({
-          path: "attributes",
-          select: "price acreage published hashtag",
+          path: "attributesId",
+          foreignField: "id", //tìm theo id
+          select: "id price acreage published hashtag", // Select the relevant fields
+          strictPopulate: false, // Allow population with UUID (string) references
+        })
+        .populate({
+          path: "imagesId",
+          foreignField: "id", //tìm theo id
+          select: "id image", // Select the relevant fields
+          strictPopulate: false, // Allow population with UUID (string) references
         })
         .select("id title star createdAt")
         .lean();
@@ -118,5 +129,68 @@ export const findPostByIdService = (postId) =>
       });
     } catch (error) {
       reject(error);
+    }
+  });
+
+export const createPostService = (postData) =>
+  new Promise(async (resolve, reject) => {
+    const postDataWId = { id: v4(), ...postData };
+    try {
+      const newPost = new Post(postDataWId); // Tạo một đối tượng Post mới từ dữ liệu đầu vào
+      const savedPost = await newPost.save(); // Lưu post vào database
+
+      resolve({
+        err: 0,
+        msg: "Post created successfully.",
+        response: savedPost,
+      });
+    } catch (error) {
+      reject({
+        err: 1,
+        msg: "Failed to create post.",
+        error,
+      });
+    }
+  });
+
+export const updatePostService = (postId, updateData) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const updatedPost = await Post.findOneAndUpdate(
+        {id : postId},
+        updateData,
+        { new: true } // Tùy chọn `new: true` để trả về tài liệu đã cập nhật
+      );
+
+      resolve({
+        err: updatedPost ? 0 : 1,
+        msg: updatedPost ? "Post updated successfully." : "Post not found.",
+        response: updatedPost,
+      });
+    } catch (error) {
+      reject({
+        err: 1,
+        msg: "Failed to update post.",
+        error,
+      });
+    }
+  });
+
+export const deletePostService = (postId) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const deletedPost = await Post.findByIdAndDelete(postId); // Tìm và xóa bài viết theo ID
+
+      resolve({
+        err: deletedPost ? 0 : 1,
+        msg: deletedPost ? "Post deleted successfully." : "Post not found.",
+        response: deletedPost,
+      });
+    } catch (error) {
+      reject({
+        err: 1,
+        msg: "Failed to delete post.",
+        error,
+      });
     }
   });
