@@ -3,7 +3,7 @@ import Image from "../models/image.js";
 import Attribute from "../models/attribute.js";
 import User from "../models/user.js";
 import dotenv from "dotenv";
-import { v4 } from 'uuid';
+import { v4 } from "uuid";
 dotenv.config();
 
 // GET ALL POSTS
@@ -157,7 +157,7 @@ export const updatePostService = (postId, updateData) =>
   new Promise(async (resolve, reject) => {
     try {
       const updatedPost = await Post.findOneAndUpdate(
-        {id : postId},
+        { id: postId },
         updateData,
         { new: true } // Tùy chọn `new: true` để trả về tài liệu đã cập nhật
       );
