@@ -1,8 +1,8 @@
-import express from 'express'
-import * as controllers from '../controllers/price.js'
+import express from "express";
+import * as controllers from "../controllers/price.js";
 // CRUD
-const router = express.Router()
+const router = express.Router();
 
-router.get('/all', controllers.getPrices)
+router.get("/", controllers.getPrices);
 
-export default router
+export default router;

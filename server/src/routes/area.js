@@ -1,8 +1,8 @@
-import express from 'express'
-import * as controllers from '../controllers/area.js'
+import express from "express";
+import * as controllers from "../controllers/area.js";
 // CRUD
-const router = express.Router()
+const router = express.Router();
 
-router.get('/all', controllers.getAreas)
+router.get("/", controllers.getAreas);
 
-export default router
+export default router;
