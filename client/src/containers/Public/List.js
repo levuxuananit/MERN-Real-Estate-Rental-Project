@@ -4,11 +4,12 @@ import { getPosts, getPostsLimit } from '../../store/actions/post'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
 
+
 const List = ({ categoryCode }) => {
     const dispatch = useDispatch()
     const [searchParams] = useSearchParams()
     const { posts } = useSelector(state => state.post)
-
+    console.log(posts)
     useEffect(() => {
         let params = []
         for (let entry of searchParams.entries()) {
@@ -24,6 +25,7 @@ const List = ({ categoryCode }) => {
         })
         if (categoryCode) searchParamsObject.categoryCode = categoryCode
         dispatch(getPostsLimit(searchParamsObject))
+        console.log(posts)
     }, [searchParams, categoryCode])
     return (
         <div className='w-full p-2 bg-white shadow-md rounded-md px-6'>
@@ -44,10 +46,10 @@ const List = ({ categoryCode }) => {
                             address={item?.address}
                             attributes={item?.attributes}
                             description={JSON.parse(item?.description)}
-                            images={JSON.parse(item?.images?.image)}
+                            images={["https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-6/459006590_2340784726260886_3808501892857031952_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeFkmw3W5KAWcxJxMOctI6B0sPSZhPx6VNyw9JmE_HpU3HkTtQXTqrSq-mMrnWrutkySMEvQc5Y5u2VgoPj__286&_nc_ohc=zlU954dijikQ7kNvgFcnB85&_nc_zt=23&_nc_ht=scontent.fsgn2-4.fna&_nc_gid=Al3pRkIX_c5LN8wxWiDcmRo&oh=00_AYBiuSZHAliOFRuhgrTomlZQIck_lWBpjbl3q5rL6Nrv3w&oe=674013C1"]}
                             star={+item?.star}
                             title={item?.title}
-                            user={item?.user}
+                            user={item?.userId}
                             id={item?.id}
                         />
                     )

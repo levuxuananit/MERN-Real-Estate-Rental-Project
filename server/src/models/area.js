@@ -8,6 +8,6 @@ const areaSchema = new Schema({
   order: { type: Number, required: true }
 });
 
-const Area = mongoose.model('Area', areaSchema);
+const Area = mongoose.models.Area || mongoose.model('Area', areaSchema);
 
 export default Area;

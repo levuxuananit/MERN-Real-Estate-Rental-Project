@@ -5,7 +5,7 @@ export const apiGetPrices = () => new Promise(async (resolve, reject) => {
     try {
         const response = await axios({
             method: 'get',
-            url: '/api/v1/price/all'
+            url: '/api/v1/prices/'
         })
         resolve(response)
     } catch (error) {
@@ -16,7 +16,7 @@ export const apiGetAreas = () => new Promise(async (resolve, reject) => {
     try {
         const response = await axios({
             method: 'get',
-            url: '/api/v1/area/all'
+            url: '/api/v1/areas/'
         })
         resolve(response)
     } catch (error) {
@@ -27,7 +27,7 @@ export const apiGetProvinces = () => new Promise(async (resolve, reject) => {
     try {
         const response = await axios({
             method: 'get',
-            url: '/api/v1/province/all'
+            url: '/api/v1/provinces/'
         })
         resolve(response)
     } catch (error) {

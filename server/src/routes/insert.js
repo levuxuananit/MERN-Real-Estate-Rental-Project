@@ -1,9 +1,9 @@
 import express from 'express'
-import * as inserController from '../controllers/insert.js'
+import * as insertController from '../controllers/insert.js'
 
 
 const router = express.Router()
-router.post('/', inserController.insert)
+router.post('/', insertController.insert)
 
 
 

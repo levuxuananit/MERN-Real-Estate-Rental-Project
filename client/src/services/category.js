@@ -4,7 +4,7 @@ export const apiGetCategories = () => new Promise(async (resolve, reject) => {
     try {
         const response = await axiosConfig({
             method: 'get',
-            url: '/api/v1/category/all',
+            url: '/api/v1/categories/',
         })
         resolve(response)
 

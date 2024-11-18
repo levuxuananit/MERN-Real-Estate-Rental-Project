@@ -17,8 +17,19 @@ export const getPostsService = () =>
           foreignField: "id", //tìm theo id
           select: "id price acreage published hashtag", // Select the relevant fields
           strictPopulate: false, // Allow population with UUID (string) references
+        })
+        .populate({
+          path: "imagesId",
+          foreignField: "id", //tìm theo id
+          select: "id image", // Select the relevant fields
+          strictPopulate: false, // Allow population with UUID (string) references
+        })
+        .populate({
+          path: "userId",
+          foreignField: "id",
+          select: "name zalo phone",
+          strictPopulate: false,
         });
-      // .populate({ path: 'user', select: 'name zalo phone' })
       // .select('id title star address description')
       // .lean(); // `.lean()` returns plain JavaScript objects
 
@@ -53,12 +64,24 @@ export const getPostsLimitService = (
       const response = await Post.find(filter)
         .skip(offset)
         .limit(limit)
-        .populate({ path: "images", select: "image" })
         .populate({
-          path: "attributes",
-          select: "price acreage published hashtag",
+          path: "imagesId",
+          foreignField: "id", //tìm theo id
+          select: "id image", // Select the relevant fields
+          strictPopulate: false, // Allow population with UUID (string) references
         })
-        .populate({ path: "user", select: "name zalo phone" })
+        .populate({
+          path: "attributesId",
+          foreignField: "id", //tìm theo id
+          select: "id price acreage published hashtag", // Select the relevant fields
+          strictPopulate: false, // Allow population with UUID (string) references
+        })
+        .populate({
+          path: "userId",
+          foreignField: "id",
+          select: "name zalo phone",
+          strictPopulate: false,
+        })
         .select("id title star address description")
         .lean();
 
@@ -89,9 +112,15 @@ export const getNewPostService = () =>
           select: "id price acreage published hashtag", // Select the relevant fields
           strictPopulate: false, // Allow population with UUID (string) references
         })
+        .populate({
+          path: "userId",
+          foreignField: "id",
+          select: "name zalo phone",
+          strictPopulate: false,
+        });;
 
-        .select("id title star createdAt")
-        .lean();
+      // .select("id title star createdAt")
+      // .lean();
 
       resolve({
         err: response ? 0 : 1,

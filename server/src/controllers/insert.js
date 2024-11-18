@@ -1,8 +1,8 @@
-import * as inserService from '../services/insert.js'
+import * as insertService from '../services/insert.js'
 
 export const insert = async (req, res) => {
     try {
-        const response = await inserService.insertService()
+        const response = await insertService.insertService()
         return res.status(200).json(response)
 
     } catch (error) {

@@ -10,6 +10,6 @@ const priceSchema = new Schema({
 });
 
 // Tạo model cho Price
-const Price = mongoose.model('Price', priceSchema);
+const Price = mongoose.models.Price || mongoose.model('Price', priceSchema);
 
 export default Price;

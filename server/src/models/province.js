@@ -21,5 +21,5 @@ provinceSchema.statics.associate = function(models) {
 };
 
 // Export the Province model
-const Province = mongoose.model('Province', provinceSchema);
+const Province = mongoose.models.Province || mongoose.model('Province', provinceSchema);
 export default Province
