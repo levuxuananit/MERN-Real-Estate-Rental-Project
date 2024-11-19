@@ -2,7 +2,7 @@ import React, { memo, useState } from "react";
 import icons from "../ultils/icons";
 import { useNavigate, Link } from "react-router-dom";
 import { formatVietnameseToString } from "../ultils/Common/formatVietnameseToString";
-
+import  userImage  from '../assets/anon-avatar.png'
 const indexs = [0, 1, 2, 3];
 
 const { GrStar, RiHeartFill, RiHeartLine, BsBookmarkStarFill } = icons;
@@ -86,7 +86,7 @@ const Item = ({
         <div className="flex items-center my-5 justify-between">
           <div className=" flex items-center">
             <img
-              src="https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-6/467153797_2407555689583789_2201602547679377938_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeH3o2sREv7ujoLDVBD2ep0X6kR_k886McbqRH-TzzoxxnhStirwGAfu8Vazx1XPdzQJm8gf3SnDHYfURIy3yul3&_nc_ohc=bACc5CrIuJEQ7kNvgEefzrk&_nc_zt=23&_nc_ht=scontent.fsgn2-4.fna&_nc_gid=ACatSqF7yYhbJzv72s6X1eP&oh=00_AYBEccfa9iU2P-dfujcYT-ztsuGl8GNOSvGPWwJg80mPzQ&oe=6741545A"
+              src={userImage}
               alt="avatar"
               className="w-[30px] h-[30px] mr-2 object-cover rounded-full"
             />
